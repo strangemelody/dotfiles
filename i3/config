@@ -28,16 +28,22 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -c 000000
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# xrandr
+exec xrandr --output HDMI-0 --scale 0.7x0.7
+exec xrandr --output DP-2 --rate 239.76
+
 # Start picom
 #exec picom --no-startup-id -f --experimental-backends
-# screen before suspend. Use loginctl lock-session to lock your screen.
 exec_always --no-startup-id "killall -q /usr/bin/picom; /usr/bin/picom --xrender-sync-fence --config ~/.config/picom/picom.conf -b"
+
+# Start dunst
+exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -188,7 +194,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-client.focused #FF000000 #FF000000 #FFFFFF
+client.focused #FF000000 #FF000000 #F7A8B8
 client.focused_inactive #FF000000 #FF000000 #5BCEFA
 client.unfocused #FF000000 #FF000000 #555555
 
